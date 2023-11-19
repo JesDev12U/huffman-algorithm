@@ -1,127 +1,140 @@
-#include <iostream>
-#include <map>
+#include <queue>
 #include <vector>
-#include <algorithm>
+#include <map>
+#include <iostream>
+
 using namespace std;
 
-vector<pair<char, int>> ordenarPorFrecuencia(map<char, int> frecuencias) {
-    vector<pair<char, int>> vec(frecuencias.begin(), frecuencias.end());
-    sort(vec.begin(), vec.end(), [](const pair<char, int>& a, const pair<char, int>& b) {
-        return a.second < b.second;
-    });
-    return vec;
-}
+class Nodo
+{
+public:
+    char caracter;
+    int frecuencia;
+    Nodo *izquierdo;
+    Nodo *derecho;
 
-map<char, int> contar_frecuencias(string texto){
-    map<char, int> frecuencias;
-    for (int i = 0; i < texto.size(); i++){
-        if (frecuencias.find(texto[i]) == frecuencias.end()){
-            frecuencias[texto[i]] = 1;
-        }else{
-            frecuencias[texto[i]]++;
+    Nodo(char caracter, int frecuencia)
+    {
+        this->caracter = caracter;
+        this->frecuencia = frecuencia;
+        this->izquierdo = nullptr;
+        this->derecho = nullptr;
+    }
+};
+
+struct comparar
+{
+    bool operator()(Nodo *l, Nodo *r)
+    {
+        return l->frecuencia > r->frecuencia;
+    }
+};
+
+class Huffman
+{
+private:
+    Nodo *raiz;
+    map<char, string> huffmanCode;
+
+    void codificar(Nodo *raiz, string str)
+    {
+        if (raiz == nullptr)
+            return;
+        if (!raiz->izquierdo && !raiz->derecho)
+        {
+            huffmanCode[raiz->caracter] = str;
+        }
+        codificar(raiz->izquierdo, str + "0");
+        codificar(raiz->derecho, str + "1");
+    }
+
+public:
+    Huffman(string texto)
+    {
+        map<char, int> frecuencia;
+        for (char ch : texto)
+        {
+            frecuencia[ch]++;
+        }
+
+        priority_queue<Nodo *, vector<Nodo *>, comparar> pq;
+        for (auto pair : frecuencia)
+        {
+            pq.push(new Nodo(pair.first, pair.second));
+        }
+
+        while (pq.size() > 1)
+        {
+            Nodo *izquierdo = pq.top();
+            pq.pop();
+            Nodo *derecho = pq.top();
+            pq.pop();
+            int sum = izquierdo->frecuencia + derecho->frecuencia;
+            Nodo *nuevo = new Nodo('\0', sum);
+            nuevo->izquierdo = izquierdo;
+            nuevo->derecho = derecho;
+            pq.push(nuevo);
+        }
+
+        raiz = pq.top();
+        codificar(raiz, "");
+    }
+
+    map<char, string> getHuffmanCode()
+    {
+        return huffmanCode;
+    }
+    Nodo *getRaiz()
+    {
+        return raiz;
+    }
+};
+
+int main()
+{
+    string texto;
+    cout << "Introduce un texto: ";
+    getline(cin, texto);
+
+    Huffman huffman(texto);
+    map<char, string> huffmanCode = huffman.getHuffmanCode();
+
+    cout << "Codificación de Huffman:\n";
+    string strEncoded;
+    for (char ch : texto)
+    {
+        strEncoded += huffmanCode[ch];
+        cout << ch << ": " << huffmanCode[ch] << "\n";
+    }
+
+    cout << "Texto codificado: " << strEncoded << "\n";
+
+    string strDecoded;
+    Nodo *nodo = huffman.getRaiz();
+    for (char bit : strEncoded)
+    {
+        if (bit == '0')
+        {
+            nodo = nodo->izquierdo;
+        }
+        else
+        {
+            nodo = nodo->derecho;
+        }
+
+        if (nodo->izquierdo == nullptr && nodo->derecho == nullptr)
+        {
+            strDecoded += nodo->caracter;
+            nodo = huffman.getRaiz(); // Reiniciar desde la raíz para el próximo bit
         }
     }
-    return frecuencias;
-}
 
-class Nodo{
-    public:
-        char letra;
-        int frecuencia;
-        Nodo* izq;
-        Nodo* der;
-        Nodo(char letra, int frecuencia){
-            this->letra = letra;
-            this->frecuencia = frecuencia;
-            this->izq = NULL;
-            this->der = NULL;
-        }
-        Nodo(char letra){
-            this->letra = letra;
-            this->frecuencia = 1;
-            this->izq = NULL;
-            this->der = NULL;
-        }
-        Nodo(int frecuencia){
-            this->letra = '\0';
-            this->frecuencia = frecuencia;
-            this->izq = NULL;
-            this->der = NULL;
-        }
-};
-
-class Lista{
-    public:
-        Nodo* inicio;
-        Lista(){
-            this->inicio = NULL;
-        }
-        void insertar(Nodo* nuevo){
-            if (inicio == NULL){
-                inicio = nuevo;
-            }else{
-                Nodo* aux = inicio;
-                while (aux->der != NULL){
-                    aux = aux->der;
-                }
-                aux->der = nuevo;
-                nuevo->izq = aux;
-            }
-        }
-        void imprimir(){
-            Nodo* aux = inicio;
-            while (aux != NULL){
-                cout << aux->letra << " " << aux->frecuencia << endl;
-                aux = aux->der;
-            }
-        }
-};
-
-class ArbolHuffman{
-    public:
-        Nodo* raiz;
-        ArbolHuffman(){
-            this->raiz = NULL;
-        }
-        void construirArbol(Lista lista){
-            while (lista.inicio->der != NULL){
-                Nodo* nuevo = new Nodo(lista.inicio->frecuencia + lista.inicio->der->frecuencia);
-                nuevo->izq = lista.inicio;
-                nuevo->der = lista.inicio->der;
-                lista.inicio->der->der->izq = nuevo;
-                lista.inicio = lista.inicio->der->der;
-            }
-            raiz = lista.inicio;
-        }
-
-        // void imprimirArbol(Nodo* raiz){
-        //     if (raiz != NULL){
-        //         cout << "NULL  "<< raiz->frecuencia << endl;
-        //         imprimirArbol(raiz->izq);
-        //         imprimirArbol(raiz->der);
-        //     }
-        // }
-};
-
-int main() {
-    string texto = "laptop";
-    //Haz el diccionario ordenado por frecuencias
-    map<char, int> frecuencias = contar_frecuencias(texto);
-    vector<pair<char, int>> ordenado = ordenarPorFrecuencia(frecuencias);
-    // //Imprime el diccionario ordenado por frecuencias
-    // for (auto i : ordenado){
-    //     cout << i.first << " " << i.second << endl;
-    // }
-    //Crea la lista de nodos
-    Lista lista;
-    for (auto i : ordenado){
-        Nodo* nuevo = new Nodo(i.first, i.second);
-        lista.insertar(nuevo);
+    // Comprobar si el último nodo es una hoja
+    if (nodo != nullptr && nodo->izquierdo == nullptr && nodo->derecho == nullptr)
+    {
+        strDecoded += nodo->caracter;
     }
-    lista.imprimir();
-    
-    ArbolHuffman arbol;
-    arbol.construirArbol(lista);
-    //arbol.imprimirArbol(arbol.raiz);
+
+    cout << "Texto decodificado: " << strDecoded << "\n";
     return 0;
 }
