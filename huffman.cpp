@@ -17,8 +17,8 @@ public:
     {
         this->caracter = caracter;
         this->frecuencia = frecuencia;
-        this->izquierdo = nullptr;
-        this->derecho = nullptr;
+        this->izquierdo = NULL;
+        this->derecho = NULL;
     }
 };
 
@@ -38,7 +38,7 @@ private:
 
     void codificar(Nodo *raiz, string str)
     {
-        if (raiz == nullptr)
+        if (raiz == NULL)
             return;
         if (!raiz->izquierdo && !raiz->derecho)
         {
@@ -122,7 +122,7 @@ int main()
             nodo = nodo->derecho;
         }
 
-        if (nodo->izquierdo == nullptr && nodo->derecho == nullptr)
+        if (nodo->izquierdo == NULL && nodo->derecho == NULL)
         {
             strDecoded += nodo->caracter;
             nodo = huffman.getRaiz(); // Reiniciar desde la raíz para el próximo bit
@@ -130,7 +130,7 @@ int main()
     }
 
     // Comprobar si el último nodo es una hoja
-    if (nodo != nullptr && nodo->izquierdo == nullptr && nodo->derecho == nullptr)
+    if (nodo != NULL && nodo->izquierdo == NULL && nodo->derecho == NULL)
     {
         strDecoded += nodo->caracter;
     }
