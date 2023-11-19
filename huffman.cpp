@@ -43,7 +43,7 @@ class Nodo{
             this->der = NULL;
         }
         Nodo(int frecuencia){
-            this->letra = NULL;
+            this->letra = '\0';
             this->frecuencia = frecuencia;
             this->izq = NULL;
             this->der = NULL;
