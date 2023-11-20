@@ -3,6 +3,7 @@
 #include <map>
 #include <iostream>
 #include <fstream>
+#include <conio.h>
 
 using namespace std;
 
@@ -169,8 +170,7 @@ int main()
         fflush(stdin);
         cin>>seguir;
     } while(seguir == 's' || seguir == 'S');
-    cout<<endl<<endl; cout << "Press any key to continue..." << std::endl;
-
-    cin.get();
+    cout<<endl<<endl; cout << "Press any key to continue...";
+    getch();
     return 0;
 }
