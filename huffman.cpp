@@ -139,7 +139,7 @@ void codDecodText(string texto){
 }
 
 void codDecodTxt(){
-    string nombreArchivo;
+    string nombreArchivo = "";
     cout << "Introduce el nombre del archivo: ";
     fflush(stdin);
     getline(cin, nombreArchivo);
@@ -163,12 +163,14 @@ int main()
 {
     char seguir = ' ';
     do{
-        system("cls");
+        cout << "\033[2J\033[1;1H";
         codDecodTxt();
         cout<<"\nDesea repetir? (s/n): ";
         fflush(stdin);
         cin>>seguir;
     } while(seguir == 's' || seguir == 'S');
-    cout<<endl<<endl; system("pause");
+    cout<<endl<<endl; cout << "Press any key to continue..." << std::endl;
+
+    cin.get();
     return 0;
 }
