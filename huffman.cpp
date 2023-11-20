@@ -90,13 +90,28 @@ public:
     {
         return raiz;
     }
+    
+    void imprimirArbol(Nodo *raiz, int cont = 0)
+    {
+        if (raiz == NULL)
+            return;
+   
+        imprimirArbol(raiz->derecho, cont + 1);
+        for (int i = 0; i < cont; i++)
+            cout << "\t";
+        cout << raiz->caracter << " (" << raiz->frecuencia << ")\n";
+
+        imprimirArbol(raiz->izquierdo, cont + 1);
+    }
+
+    
 };
 
 void codDecodText(string texto){
     Huffman huffman(texto);
     map<char, string> huffmanCode = huffman.getHuffmanCode();
 
-    cout << "Codificación de Huffman:\n";
+    cout << "Codificacion de Huffman:\n";
     string strEncoded;
     for (char ch : texto)
     {
@@ -137,6 +152,10 @@ void codDecodText(string texto){
     long long bitsDecoded = strDecoded.size() * 8;
     cout << "Bits codificados: " << bitsEnconded << "\n";
     cout << "Bits decodificados: " << bitsDecoded << "\n";
+    cout<<"\n\nArbol de Huffman:\n";
+    huffman.imprimirArbol(huffman.getRaiz());
+    cout<<endl<<endl; cout << "Press any key to continue...";
+    getch();
 }
 
 void codDecodTxt(){
@@ -162,14 +181,39 @@ void codDecodTxt(){
 
 int main()
 {
-    char seguir = ' ';
+    bool seguir = true;
     do{
+        int opcion = 0;
+        //cls
         cout << "\033[2J\033[1;1H";
-        codDecodTxt();
-        cout<<"\nDesea repetir? (s/n): ";
-        fflush(stdin);
-        cin>>seguir;
-    } while(seguir == 's' || seguir == 'S');
+        cout<<"\nMENU\n";
+        cout<<"\n\n1. Codificar/Decodificar texto";
+        cout<<"\n2. Codificar/Decodificar archivo";
+        cout<<"\n3. Salir\n";
+        cout<<"\nTeclee una opcion: ";
+        cin>>opcion;
+        switch(opcion){
+            case 1:{
+                string texto;
+                cout<<"\nIntroduce el texto: ";
+                fflush(stdin);
+                getline(cin, texto);
+                codDecodText(texto);
+                break;
+            }
+            case 2:{
+                codDecodTxt();
+                break;
+            }
+            case 3:{
+                seguir = false;
+                break;
+            }
+            default:{
+                cout<<"\nOpcion no valida...";
+            }
+        }
+    } while(seguir);
     cout<<endl<<endl; cout << "Press any key to continue...";
     getch();
     return 0;
