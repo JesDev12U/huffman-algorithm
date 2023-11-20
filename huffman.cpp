@@ -90,12 +90,12 @@ public:
     {
         return raiz;
     }
-    
+
     void imprimirArbol(Nodo *raiz, int cont = 0)
     {
         if (raiz == NULL)
             return;
-   
+
         imprimirArbol(raiz->derecho, cont + 1);
         for (int i = 0; i < cont; i++)
             cout << "\t";
@@ -103,11 +103,10 @@ public:
 
         imprimirArbol(raiz->izquierdo, cont + 1);
     }
-
-    
 };
 
-void codDecodText(string texto){
+void codDecodText(string texto)
+{
     Huffman huffman(texto);
     map<char, string> huffmanCode = huffman.getHuffmanCode();
 
@@ -152,13 +151,16 @@ void codDecodText(string texto){
     long long bitsDecoded = strDecoded.size() * 8;
     cout << "Bits codificados: " << bitsEnconded << "\n";
     cout << "Bits decodificados: " << bitsDecoded << "\n";
-    cout<<"\n\nArbol de Huffman:\n";
+    cout << "\n\nArbol de Huffman:\n";
     huffman.imprimirArbol(huffman.getRaiz());
-    cout<<endl<<endl; cout << "Press any key to continue...";
+    cout << endl
+         << endl;
+    cout << "Press any key to continue...";
     getch();
 }
 
-void codDecodTxt(){
+void codDecodTxt()
+{
     string nombreArchivo = "";
     cout << "Introduce el nombre del archivo: ";
     fflush(stdin);
@@ -182,39 +184,47 @@ void codDecodTxt(){
 int main()
 {
     bool seguir = true;
-    do{
+    do
+    {
         int opcion = 0;
-        //cls
+        // cls
         cout << "\033[2J\033[1;1H";
-        cout<<"\nMENU\n";
-        cout<<"\n\n1. Codificar/Decodificar texto";
-        cout<<"\n2. Codificar/Decodificar archivo";
-        cout<<"\n3. Salir\n";
-        cout<<"\nTeclee una opcion: ";
-        cin>>opcion;
-        switch(opcion){
-            case 1:{
-                string texto;
-                cout<<"\nIntroduce el texto: ";
-                fflush(stdin);
-                getline(cin, texto);
-                codDecodText(texto);
-                break;
-            }
-            case 2:{
-                codDecodTxt();
-                break;
-            }
-            case 3:{
-                seguir = false;
-                break;
-            }
-            default:{
-                cout<<"\nOpcion no valida...";
-            }
+        cout << "\nMENU\n";
+        cout << "\n\n1. Codificar/Decodificar texto";
+        cout << "\n2. Codificar/Decodificar archivo";
+        cout << "\n3. Salir\n";
+        cout << "\nTeclee una opcion: ";
+        cin >> opcion;
+        switch (opcion)
+        {
+        case 1:
+        {
+            string texto;
+            cout << "\nIntroduce el texto: ";
+            fflush(stdin);
+            getline(cin, texto);
+            codDecodText(texto);
+            break;
         }
-    } while(seguir);
-    cout<<endl<<endl; cout << "Press any key to continue...";
+        case 2:
+        {
+            codDecodTxt();
+            break;
+        }
+        case 3:
+        {
+            seguir = false;
+            break;
+        }
+        default:
+        {
+            cout << "\nOpcion no valida...";
+        }
+        }
+    } while (seguir);
+    cout << endl
+         << endl;
+    cout << "Press any key to continue...";
     getch();
     return 0;
 }
