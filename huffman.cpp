@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -90,12 +91,7 @@ public:
     }
 };
 
-int main()
-{
-    string texto;
-    cout << "Introduce un texto: ";
-    getline(cin, texto);
-
+void codDecodText(string texto){
     Huffman huffman(texto);
     map<char, string> huffmanCode = huffman.getHuffmanCode();
 
@@ -136,5 +132,43 @@ int main()
     // }
 
     cout << "Texto decodificado: " << strDecoded << "\n";
+    long long bitsEnconded = strEncoded.size();
+    long long bitsDecoded = strDecoded.size() * 8;
+    cout << "Bits codificados: " << bitsEnconded << "\n";
+    cout << "Bits decodificados: " << bitsDecoded << "\n";
+}
+
+void codDecodTxt(){
+    string nombreArchivo;
+    cout << "Introduce el nombre del archivo: ";
+    fflush(stdin);
+    getline(cin, nombreArchivo);
+    ifstream archivo;
+    archivo.open(nombreArchivo, ios::in);
+    if (!archivo)
+    {
+        cerr << "No se pudo abrir el archivo";
+        return;
+    }
+    string texto;
+    string linea;
+    while (getline(archivo, linea))
+    {
+        texto += linea;
+    }
+    codDecodText(texto);
+}
+
+int main()
+{
+    char seguir = ' ';
+    do{
+        system("cls");
+        codDecodTxt();
+        cout<<"\nDesea repetir? (s/n): ";
+        fflush(stdin);
+        cin>>seguir;
+    } while(seguir == 's' || seguir == 'S');
+    cout<<endl<<endl; system("pause");
     return 0;
 }
