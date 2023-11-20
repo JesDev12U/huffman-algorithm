@@ -33,15 +33,16 @@ int main()
     pq.push(7);
     pq.push(8);
     pq.push(9);
+    pq.pop();
 
     cout<<pq.empty()<<endl; //Regresa un binario si esta vacio o no
     cout<<pq.size()<<endl; //Regresa el tamaño de la cola de prioridad
     cout<<pq.top()<<endl;
 
     //Imprimir todos los elementos de la cola de prioridad
-    while(!pq.empty()){
-        cout<<pq.top()<<endl;
-        pq.pop();
-    }
+    // while(!pq.empty()){
+    //     cout<<pq.top()<<endl;
+    //     pq.pop();
+    // }
     return 0;
 }

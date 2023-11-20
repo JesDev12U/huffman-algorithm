@@ -129,11 +129,11 @@ int main()
         }
     }
 
-    // Comprobar si el último nodo es una hoja
-    if (nodo != NULL && nodo->izquierdo == NULL && nodo->derecho == NULL)
-    {
-        strDecoded += nodo->caracter;
-    }
+    // // Comprobar si el último nodo es una hoja
+    // if (nodo != NULL && nodo->izquierdo == NULL && nodo->derecho == NULL)
+    // {
+    //     strDecoded += nodo->caracter;
+    // }
 
     cout << "Texto decodificado: " << strDecoded << "\n";
     return 0;
