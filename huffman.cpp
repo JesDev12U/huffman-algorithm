@@ -24,10 +24,13 @@ public:
     }
 };
 
-struct comparar
-{
-    bool operator()(Nodo *l, Nodo *r)
-    {
+struct comparar {
+    bool operator()(Nodo* l, Nodo* r) {
+        if (l->frecuencia == r->frecuencia) {
+            // Si las frecuencias son iguales, ordenar alfabéticamente
+            return l->caracter > r->caracter;
+        }
+        // Si las frecuencias son diferentes, ordenar por frecuencia
         return l->frecuencia > r->frecuencia;
     }
 };
@@ -51,6 +54,20 @@ private:
     }
 
 public:
+
+    void imprimirColaPrioridad(priority_queue<Nodo *, vector<Nodo *>, comparar> pq)
+    {
+        priority_queue<Nodo *, vector<Nodo *>, comparar> temp = pq; // Copia de la cola para no alterar la original
+        cout << "Cola de Prioridad:\n";
+        while (!temp.empty())
+        {
+            Nodo *nodo = temp.top();
+            cout << nodo->caracter << " (" << nodo->frecuencia << ") ";
+            temp.pop();
+        }
+        cout << "\n";
+    }
+
     Huffman(string texto)
     {
         map<char, int> frecuencia;
@@ -64,6 +81,8 @@ public:
         {
             pq.push(new Nodo(pair.first, pair.second));
         }
+
+        imprimirColaPrioridad(pq); // Llamada al método para imprimir la cola de prioridad
 
         while (pq.size() > 1)
         {
