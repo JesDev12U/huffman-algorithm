@@ -205,7 +205,7 @@ void codDecodText(string texto)
     getch(); // Pausar el programa hasta que se presione una tecla
 }
 
-void codDecodTxt()
+void codDecodTxt() //El proceso que hace esta función es casi igual al metodo codDecodText, la diferencia es que esta función lee un archivo de texto
 {
     string nombreArchivo = "";
     cout << "Introduce el nombre del archivo: ";
