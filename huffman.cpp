@@ -37,10 +37,10 @@ public:
 
 // Estructura comparar para la cola de prioridad, esto es para ordenar los nodos
 struct comparar {
-    bool operator()(Nodo* l, Nodo* r) {
+    bool operator()(Nodo* l, Nodo* r) { // Se sobrecarga el operador () para comparar los nodos, un nodo es el primer par (l) y el otro es el segundo par (r)
         if (l->frecuencia == r->frecuencia) {
             // Si las frecuencias son iguales, ordenar alfabéticamente
-            return l->caracter > r->caracter;
+            return l->caracter > r->caracter; // Se ordena conforme al código ASCII
         }
         // Si las frecuencias son diferentes, ordenar por frecuencia
         return l->frecuencia > r->frecuencia;
