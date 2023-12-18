@@ -161,12 +161,18 @@ void codDecodText(string texto)
 
     cout << "Codificacion de Huffman:\n";
     string strEncoded;
+    map<char, bool> caracteresImpresos; // Mapa para almacenar los caracteres ya impresos
     for (char ch : texto) // Recorrer el texto
     {
         // Concatenar el código de Huffman de cada caracter
         strEncoded += huffmanCode[ch];
-        // Imprimir el caracter y su código de Huffman
-        cout << ch << ": " << huffmanCode[ch] << "\n";
+        // Verificar si el carácter ya ha sido impreso
+        if (caracteresImpresos.find(ch) == caracteresImpresos.end()) { // verifica si la busqueda del caracter ch en el mapa caracteresImpresos es igual al final del mapa, si es así, significa que no se encontró el caracter, por lo tanto debe imprimirse
+            // Si no ha sido impreso, imprimir el carácter y su código de Huffman
+            cout << ch << ": " << huffmanCode[ch] << "\n";
+            // Marcar el carácter como impreso en el mapa
+            caracteresImpresos[ch] = true; // Para que find() no devuelva el final del mapa
+        }
     }
 
     cout << "Texto codificado: " << strEncoded << "\n";
