@@ -136,3 +136,43 @@ main{
     color: white;
     background-color: #242424;
 }
+
+/*Haz que el contenido sea responsive*/
+@media screen and (max-width: 850px){
+    .container{
+        width: 100%;
+    }
+    .main-bottom{
+        flex-direction: column;
+    }
+    .main-bottom-left{
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 527px){
+    .titulo{
+        font-size: 5vh;
+    }
+    .main-bottom-left h2,
+    .main-bottom-right h2{
+        font-size: 3vh;
+    }
+}
+
+/*.container{
+    background-color: rgb(218, 218, 218);
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    /*Centra el div*/
+    /*margin: auto;
+    /*Bordes redondeados*/
+    /*border-radius: 10px;
+    /*Separacion del borde*/
+    /*padding: 10px;
+    /*Separacion entre elementos*/
+    /*margin-top: 20px;
+    margin-bottom: 20px;
+}*/
