@@ -1,4 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Mukta&display=swap');
+
+@keyframes pulsate {
+    0% { 
+        transform: scale(1); 
+        background-color: #242424; 
+    }
+    50% { 
+        transform: scale(1.2); 
+        background-color: #a3a2a2; 
+    }
+    100% { 
+        transform: scale(1); 
+        background-color: #242424; 
+    }
+}
+
+@keyframes pulsate2 {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
 body{
     margin:0;
     padding:0;
@@ -54,6 +76,7 @@ main{
     border-radius: 10px;
     /*Separacion del borde*/
     padding: 10px;
+    padding-bottom:35px;
     /*Separacion entre elementos*/
     margin-top: 20px;
     margin-bottom: 20px;
@@ -95,46 +118,45 @@ main{
     text-align: center;
 }
 
-.main-bottom-left h3{
-    font-size: 2.5vh;
+.main-bottom-left h2,
+.main-bottom-right h2{
+    font-size: 3vh;
     color: #000000;
 }
 
-.main-bottom-left p{
-    font-size: 2vh;
+.main-bottom-left p,
+.main-bottom-right p{
+    font-size: 2.5vh;
     color: #000000;
 }
 .main-bottom-right{
     text-align: center;
 }
 
-.main-bottom-right h3{
-    font-size: 2.5vh;
-    color: #000000;
-}
-
-.main-bottom-right p{
-    font-size: 2vh;
-    color: #000000;
-}
-
 .main-bottom-right a,
 .main-bottom-left a{
-    color: #000000;
+    color: white;
     font-size: 2.5vh;
     text-decoration:none;
-    background-color: #a3a2a2;
+    background-color: #242424;
     padding-top:3px;
     padding-bottom:3px;
     padding-left:5px;
     padding-right:5px;
     border-radius:8px;
+    animation: pulsate 1s infinite;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+}
+
+.main-bottom-right .inicio-btn{
+    animation: none;
 }
 
 .main-bottom-right a:hover,
 .main-bottom-left a:hover{
-    color: white;
-    background-color: #242424;
+    color: black;
+    background-color: #a3a2a2;
 }
 
 /*Haz que el contenido sea responsive*/
@@ -176,3 +198,65 @@ main{
     /*margin-top: 20px;
     margin-bottom: 20px;
 }*/
+
+.labelform{
+    color: #000000;
+    font-size: 2.5vh;
+}
+
+#error-message {
+    color: red; /* Cambia el color del texto a rojo */
+    text-align: center; /* Centra el texto */
+    font-size: 1.2em; /* Aumenta el tamaño del texto */
+    font-weight: bold; /* Hace el texto en negrita */
+    margin-top: 10px; /* Agrega un margen en la parte superior */
+}
+
+#file-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:#242424;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.boton{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color:#242424;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 16px;
+    border-style: none;
+    width:50vh;
+    animation: pulsate2 1s infinite;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+}
+
+.boton:hover{
+    background-color: #a3a2a2;
+    color:black;
+}
+
+.boton:disabled{
+    animation:none;
+    background-color: #a3a2a2;
+    color:black;
+}
+
+#file-label:hover {
+    background-color: #a3a2a2;
+    color:black;
+}
+
+#file-label.dragging {
+    border: 2px dashed #000;
+    background-color: #f9f9f9;
+}
+

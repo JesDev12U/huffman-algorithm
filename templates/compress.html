@@ -2,14 +2,48 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Comprimir Archivo</title>
+    <title>Huffman | Comprimir Archivo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta author="Jesus Antonio Lopez Bandala">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-compress.css') }}">
+    <script src="https://kit.fontawesome.com/ecae724dfb.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <h1>Comprimir Archivo</h1>
-    <form action="/compress" method="POST" enctype="multipart/form-data">
-        <label for="fileToCompress">Seleccionar archivo .txt para comprimir:</label><br>
-        <input type="file" id="fileToCompress" name="fileToCompress"><br><br>
-        <input type="submit" value="Comprimir">
-    </form>
+    <main>
+        <h1 class="titulo">Comprimir Archivo</h1>
+        <div class="container">
+            <form action="/compress" method="POST" enctype="multipart/form-data">
+                <div class="main-bottom-left">
+                    <label for="fileToCompress" class="labelform">Selecciona o arrastra un archivo .txt para comprimir:</label><br>
+                    <input type="file" id="fileToCompress" name="fileToCompress" style="display: none;" accept=".txt">
+                    <label for="fileToCompress" id="file-label" draggable="true" ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)">Seleccionar archivo</label>
+                    <p id="error-message" style="display: none; color: red;"></p>
+                    <p id="upload-message" style="display: none;"></p>
+                    <script src="{{ url_for('static', filename='js/dragdroptxt.js') }}"></script>
+                </div>
+                <br>
+                <div class="main-bottom-right">
+                    <input type="submit" value="Comprimir" class="boton"><br><br>
+                    <script src="{{url_for('static', filename='js/habdeshabboton.js')}}"></script>
+                    <a href="{{url_for('index')}}" class="inicio-btn">Regresar al inicio</a>
+                </div>
+            </form>
+        </div>
+        <div class="redes-sociales">
+            <ul>
+                <li><a href="https://www.facebook.com/jesusantonio.lopezbandala.7" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                <li><a href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ==" target="_blank"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="https://github.com/JesDev12U" target="_blank"><i class="fab fa-github"></i></a></li>
+                <li><a href="https://www.linkedin.com/in/jalb12u/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+                <li><a href="https://www.tiktok.com/@.jes12u" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+            </ul>            
+        </div>
+        <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
+    </main>
+    <div id="particles-js"></div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+    <script src="{{url_for('static', filename='js/particlesjs-config.json')}}"></script>
 </body>
 </html>
