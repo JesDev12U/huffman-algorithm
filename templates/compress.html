@@ -14,7 +14,7 @@
     <main>
         <h1 class="titulo">Comprimir Archivo</h1>
         <div class="container">
-            <form action="/compress" method="POST" enctype="multipart/form-data">
+            <form action="/compress" method="POST" enctype="multipart/form-data" id="uploadForm">
                 <div class="main-bottom-left">
                     <label for="fileToCompress" class="labelform">Selecciona o arrastra un archivo .txt para comprimir:</label><br>
                     <input type="file" id="fileToCompress" name="fileToCompress" style="display: none;" accept=".txt">
@@ -25,7 +25,26 @@
                 </div>
                 <br>
                 <div class="main-bottom-right">
-                    <input type="submit" value="Comprimir" class="boton"><br><br>
+                    <input type="submit" value="Comprimir" class="boton" id="compressButton"><br><br>
+                    <div id="loadingSpinner" style="display: none;">
+                        <img src="{{ url_for('static', filename='images/spinner.gif') }}" alt="Cargando...">
+                    </div>
+                    <script>
+                        document.getElementById("uploadForm").addEventListener("submit", function() {
+                            document.getElementById("compressButton").value = "Comprimiendo...";
+                            document.getElementById("compressButton").disabled = true;
+                            document.getElementById("loadingSpinner").style.display = "block"; // Muestra el spinner
+                        });
+
+                        // Cuando la compresión se haya completado
+                        // Esto dependerá de cómo estés manejando la compresión en tu código
+                        // Aquí hay un ejemplo genérico
+                        compressFile().then(() => {
+                            document.getElementById("compressButton").value = "Comprimir";
+                            document.getElementById("compressButton").disabled = false;
+                            document.getElementById("loadingSpinner").style.display = "none"; // Oculta el spinner
+                        });
+                    </script>
                     <script src="{{url_for('static', filename='js/habdeshabboton.js')}}"></script>
                     <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
                 </div>

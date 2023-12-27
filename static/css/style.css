@@ -155,7 +155,13 @@ main{
 
 .main-bottom-right a:hover,
 .main-bottom-left a:hover{
-    color: black;
+    color: white;
+    background-color: #242424;
+    animation:none;
+}
+
+.main-bottom-right .inicio-btn:hover{
+    color:black;
     background-color: #a3a2a2;
 }
 
@@ -275,4 +281,31 @@ main{
 #dropzone.dragover {
     /* Cambia el color de fondo cuando un archivo se está arrastrando sobre el recuadro */
     background-color: #eee;
+}
+
+.main-bottom-right #loadingSpinner img{
+    width: 100px;
+    height: 100px;
+}
+
+.download-link{
+    color: white;
+    font-size: 2.5vh;
+    text-decoration:none;
+    background-color: #242424;
+    padding-top:3px;
+    padding-bottom:3px;
+    padding-left:5px;
+    padding-right:5px;
+    border-radius:8px;
+    animation: pulsate 1s infinite;
+    text-transform: uppercase;
+    letter-spacing: 6px;
+    text-align: center;
+}
+
+.download-link:hover{
+    color: white;
+    background-color: #242424;
+    animation:none;
 }

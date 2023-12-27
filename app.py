@@ -26,8 +26,7 @@ def compress_file():
         # Llamar al programa de compresión C++
         subprocess.run(['./huffmancompress', 'uploads/' + file.filename])  # Reemplaza con el nombre de tu ejecutable
         
-        # Luego de terminar la compresión, redirige a la página de espera
-        return jsonify({'message': 'Archivo comprimido'})
+        return render_template('filecompressed.html');
     else:
         return jsonify({'error': 'Se debe cargar un archivo .txt'})
 
