@@ -11,4 +11,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Si hay un archivo seleccionado, habilita el botón, de lo contrario, deshabilítalo
         button.disabled = !this.files.length;
     });
+
+    // Escucha los eventos de arrastrar y soltar en el body
+    document.body.addEventListener('dragover', function(event) {
+        event.preventDefault();
+    });
+
+    document.body.addEventListener('drop', function(event) {
+        event.preventDefault();
+        // Si hay un archivo arrastrado y soltado, habilita el botón
+        if (event.dataTransfer.files.length) {
+            button.disabled = false;
+        }
+    });
 });

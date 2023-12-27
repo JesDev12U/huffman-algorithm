@@ -20,14 +20,14 @@
                     <input type="file" id="fileToCompress" name="fileToCompress" style="display: none;" accept=".txt">
                     <label for="fileToCompress" id="file-label" draggable="true" ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)">Seleccionar archivo</label>
                     <p id="error-message" style="display: none; color: red;"></p>
-                    <p id="upload-message" style="display: none;"></p>
+                    <b><p id="upload-message" style="display: none;"></p></b>
                     <script src="{{ url_for('static', filename='js/dragdroptxt.js') }}"></script>
                 </div>
                 <br>
                 <div class="main-bottom-right">
                     <input type="submit" value="Comprimir" class="boton"><br><br>
                     <script src="{{url_for('static', filename='js/habdeshabboton.js')}}"></script>
-                    <a href="{{url_for('index')}}" class="inicio-btn">Regresar al inicio</a>
+                    <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
                 </div>
             </form>
         </div>

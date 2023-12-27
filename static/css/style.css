@@ -239,6 +239,12 @@ main{
     letter-spacing: 6px;
 }
 
+@media screen and (max-width: 1007px){
+    .boton{
+        width: 90%;
+    }
+}
+
 .boton:hover{
     background-color: #a3a2a2;
     color:black;
