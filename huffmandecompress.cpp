@@ -49,7 +49,7 @@ Nodo *leerArbolHuffman(ifstream &archivoEntrada)
     return new Nodo('\0', 0, izquierdo, derecho);
 }
 
-void descomprimirArchivo(string nomArchivo)
+void descomprimirArchivo(string nomArchivo, string nomArchivoSalida)
 {
     ifstream archivoComprimido(nomArchivo, ios::in | ios::binary);
     if (!archivoComprimido.is_open())
@@ -64,7 +64,7 @@ void descomprimirArchivo(string nomArchivo)
     // Lee la cantidad de bits válidos en el último byte
     int bitsValidos = 0;
     Nodo *nodoActual = raiz;
-    ofstream archivoDescomprimido("descomprimido.txt", ios::out | ios::binary);
+    ofstream archivoDescomprimido(nomArchivoSalida + ".txt", ios::out | ios::binary);
     while (archivoComprimido.read(reinterpret_cast<char *>(&buffer), 1))
     { // Lee un byte del archivo
         for (int i = 7; i >= 0; i--)
@@ -95,11 +95,13 @@ void descomprimirArchivo(string nomArchivo)
 int main(int argc, char const *argv[])
 {
     string nomArchivo;
-    if(argc == 0){
-        cout<<"ERROR! No se ingreso el nombre del archivo"<<endl;
+    string nomArchivoSalida;
+    if(argc < 3){
+        cout<<"ERROR! Debe ingresar el nombre del archivo a descomprimir y el nombre del archivo de salida"<<endl;
         return 1;
     }
     nomArchivo = argv[1];
-    descomprimirArchivo(nomArchivo);
+    nomArchivoSalida = argv[2];
+    descomprimirArchivo(nomArchivo, nomArchivoSalida);
     return 0;
 }

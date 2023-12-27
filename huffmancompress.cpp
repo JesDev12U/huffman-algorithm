@@ -95,9 +95,9 @@ void escribirArbolHuffman(Nodo *raiz, ofstream &archivoComprimido)
     }
 }
 
-void comprimirArchivo(string texto, unordered_map<char, string> &codigosHuffman)
+void comprimirArchivo(string texto, unordered_map<char, string> &codigosHuffman, string nomArchivoSalida)
 {
-    ofstream archivoComprimido("comprimido.huff", ios::out | ios::binary);
+    ofstream archivoComprimido(nomArchivoSalida + ".huff", ios::out | ios::binary);
     if (!archivoComprimido.is_open())
     {
         cout << "No se pudo abrir el archivo comprimido" << endl;
@@ -149,11 +149,13 @@ void agregarSaltoDeLinea(string nomArchivo)
 int main(int argc, char const *argv[])
 {
     string nomArchivo;
-    if(argc == 0){
-        cout<<"\nERROR! Debe ingresar el nombre del archivo a comprimir\n";
+    string nomArchivoSalida;
+    if(argc < 3){
+        cout<<"\nERROR! Debe ingresar el nombre del archivo a comprimir y el nombre del archivo de salida\n";
         return 1;
     }
     nomArchivo = argv[1];
+    nomArchivoSalida = argv[2];
     ifstream archivoEntrada(nomArchivo);
     if (!archivoEntrada.is_open())
     {
@@ -171,6 +173,6 @@ int main(int argc, char const *argv[])
     unordered_map<char, string> codigosHuffman;
     Nodo *raiz = construirArbolHuffman(texto);
     imprimirCodigos(raiz, "", codigosHuffman);
-    comprimirArchivo(texto, codigosHuffman);
+    comprimirArchivo(texto, codigosHuffman, nomArchivoSalida);
     return 0;
 }
