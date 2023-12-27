@@ -223,6 +223,11 @@ main{
     font-size: 16px;
 }
 
+#file-label:hover{
+    background-color: #a3a2a2;
+    color:black;
+}
+
 .boton{
     display: inline-block;
     padding: 10px 20px;
@@ -256,13 +261,18 @@ main{
     color:black;
 }
 
-#file-label:hover {
-    background-color: #a3a2a2;
-    color:black;
+#dropzone {
+    /* Estos son solo ejemplos de estilos, puedes cambiarlos a lo que necesites */
+    border: 2px dashed #aaa; /* Borde punteado */
+    border-radius: 10px; /* Bordes redondeados */
+    padding: 50px; /* Espacio interior */
+    text-align: center; /* Centrar el texto */
+    background-color: #f9f9f9; /* Color de fondo */
+    color: #333; /* Color del texto */
+    z-index:7;
 }
 
-#file-label.dragging {
-    border: 2px dashed #000;
-    background-color: #f9f9f9;
+#dropzone.dragover {
+    /* Cambia el color de fondo cuando un archivo se está arrastrando sobre el recuadro */
+    background-color: #eee;
 }
-

@@ -1,39 +1,46 @@
-function dragOver(e) {
-    e.preventDefault();
-    document.getElementById('file-label').classList.add('dragging');
-}
+document.addEventListener('DOMContentLoaded', function() {
+    var fileInput = document.getElementById('fileToCompress');
+    var dropzone = document.getElementById('dropzone');
+    var dragCounter = 0;
 
-function drop(e) {
-    e.preventDefault();
-    e.currentTarget.classList.remove('dragging');
-    // Obtén los archivos arrastrados
-    var files = e.dataTransfer.files;
-    // Comprueba si el archivo es de tipo .txt
-    if (files[0].type !== 'text/plain') {
-        document.getElementById('error-message').textContent = 'Por favor, solo arrastra archivos .txt';
-        document.getElementById('error-message').style.display = 'block';
-        return;
-    }
+    document.addEventListener('dragenter', function(event) {
+        event.preventDefault();
+        dragCounter++;
+        dropzone.style.display = 'block';
+        dropzone.classList.add('dragover');
+    });
 
-    document.getElementById('fileToCompress').files = files;
+    document.addEventListener('dragleave', function(event) {
+        event.preventDefault();
+        dragCounter--;
+        if (dragCounter === 0) {
+            dropzone.style.display = 'none';
+            dropzone.classList.remove('dragover');
+        }
+    });
 
-    document.getElementById('upload-message').textContent = 'Archivo subido: ' + files[0].name;
-
-    document.getElementById('upload-message').style.display = 'block';
-
-    document.getElementById('error-message').style.display = 'none';
-}
-
-document.getElementById('fileToCompress').addEventListener('change', function() {
-    var uploadMessage = document.getElementById('upload-message');
-    if (this.files.length) {
-        uploadMessage.style.display = 'block';
-        uploadMessage.textContent = 'Archivo subido: ' + this.files[0].name;
-    } else {
-        uploadMessage.style.display = 'none';
-    }
+    document.addEventListener('drop', function(event) {
+        event.preventDefault();
+        dragCounter = 0;
+        dropzone.style.display = 'none';
+        dropzone.classList.remove('dragover');
+        if (event.dataTransfer.files.length === 1) {
+            var file = event.dataTransfer.files[0];
+            var fileName = file.name;
+            var fileExtension = fileName.split('.').pop().toLowerCase();
+            if (fileExtension !== 'txt') {
+                alert('Por favor, arrastra archivos de texto plano .txt');
+                return;
+            }
+            var dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+            // Dispara manualmente el evento change en el input de archivos
+            var changeEvent = new Event('change');
+            fileInput.dispatchEvent(changeEvent);
+        } else {
+            alert('Por favor, arrastra solo un archivo.');
+        }
+    });
+    
 });
-
-function dragLeave(e) {
-    document.getElementById('file-label').classList.remove('dragging');
-}

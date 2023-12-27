@@ -18,9 +18,9 @@
                 <div class="main-bottom-left">
                     <label for="fileToCompress" class="labelform">Selecciona o arrastra un archivo .txt para comprimir:</label><br>
                     <input type="file" id="fileToCompress" name="fileToCompress" style="display: none;" accept=".txt">
-                    <label for="fileToCompress" id="file-label" draggable="true" ondragover="dragOver(event)" ondrop="drop(event)" ondragleave="dragLeave(event)">Seleccionar archivo</label>
-                    <p id="error-message" style="display: none; color: red;"></p>
-                    <b><p id="upload-message" style="display: none;"></p></b>
+                    <div id="dropzone" style="display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0,0,0,0.5); color: white; text-align: center; line-height: 100vh; z-index: 9999;"></div>
+                    <label for="fileToCompress" id="file-label">Seleccionar archivo</label>
+                    <b><p id="upload-message"></p></b>
                     <script src="{{ url_for('static', filename='js/dragdroptxt.js') }}"></script>
                 </div>
                 <br>
