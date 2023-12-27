@@ -40,7 +40,7 @@ def decompress_file():
         # Llamar al programa de descompresión C++
         subprocess.run(['./huffmandecompress', 'uploads/' + file.filename])  # Reemplaza con el nombre de tu ejecutable
         
-        return jsonify({'message': 'Archivo descomprimido'})
+        return render_template('filedecompressed.html');
     else:
         return jsonify({'error': 'Se debe cargar un archivo .huff'})
 
