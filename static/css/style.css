@@ -66,7 +66,8 @@ main{
 }
 
 .container{
-    background-color: rgb(218, 218, 218);
+    background-color: #24242462;
+    color:white;
     width: 50%;
     align-items: center;
     justify-content: center;
@@ -121,13 +122,13 @@ main{
 .main-bottom-left h2,
 .main-bottom-right h2{
     font-size: 3vh;
-    color: #000000;
+    color: white;
 }
 
 .main-bottom-left p,
 .main-bottom-right p{
     font-size: 2.5vh;
-    color: #000000;
+    color: white;
 }
 .main-bottom-right{
     text-align: center;
@@ -206,7 +207,7 @@ main{
 }*/
 
 .labelform{
-    color: #000000;
+    color: white;
     font-size: 2.5vh;
 }
 

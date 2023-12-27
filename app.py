@@ -60,5 +60,10 @@ def download_decompressed():
     else:
         return jsonify({'error': 'Archivo descomprimido no encontrado'})
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # nota que pasamos el error como argumento a la plantilla
+    return render_template('404.html'), 404
+
 if __name__ == '__main__':
     app.run(debug=True)
