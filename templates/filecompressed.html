@@ -16,6 +16,10 @@
                 // Iniciar la descarga del archivo
                 window.location.href = '{{ url_for('download_file') }}';
             }
+            // Redirigir a la página de inicio después de 5 minutos
+            setTimeout(function() {
+                window.location.href = '{{ url_for('index') }}';
+            }, 300000); // 300000 milisegundos son 5 minutos   
         };
     </script>
 </head>
