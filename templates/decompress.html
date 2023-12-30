@@ -1,68 +1,157 @@
+<!--@author Jesus Antonio Lopez Bandala-->
+<!--@version 1.0-->
+<!--@date 2023-12-27-->
+<!--@brief Página para la descompresión de archivos .huff-->
+<!--@code HTML Django-->
+
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Huffman | Comprimir Archivo</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta author="Jesus Antonio Lopez Bandala">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-compress.css') }}">
-    <script src="https://kit.fontawesome.com/ecae724dfb.js" crossorigin="anonymous"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Huffman | Descomprimir Archivo</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta author="Jesus Antonio Lopez Bandala" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style-compress.css') }}"
+    />
+    <script
+      src="https://kit.fontawesome.com/ecae724dfb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <main>
-        <h1 class="titulo">Descomprimir Archivo</h1>
-        <div class="container">
-            <form action="/decompress" method="POST" enctype="multipart/form-data" id="uploadForm">
-                <div class="main-bottom-left">
-                    <label for="fileToDecompress" class="labelform">Selecciona o arrastra un archivo .huff para descomprimir:</label><br>
-                    <input type="file" id="fileToDecompress" name="fileToDecompress" style="display: none;" accept=".huff">
-                    <div id="dropzone" style="display: none; position: fixed; top: 0; right: 0; bottom: 0; left: 0; background: rgba(0,0,0,0.5); color: white; text-align: center; line-height: 100vh; z-index: 9999;"></div>
-                    <label for="fileToDecompress" id="file-label">Seleccionar archivo</label>
-                    <b><p id="upload-message"></p></b>
-                    <script src="{{ url_for('static', filename='js/dragdrophuff.js') }}"></script>
-                </div>
-                <br>
-                <div class="main-bottom-right">
-                    <input type="submit" value="Descomprimir" class="boton" id="descompressButton"><br><br>
-                    <div id="loadingSpinner" style="display: none;">
-                        <img src="{{ url_for('static', filename='images/spinner.gif') }}" alt="Cargando...">
-                    </div>
-                    <script>
-                        document.getElementById("uploadForm").addEventListener("submit", function() {
-                            document.getElementById("descompressButton").value = "Descomprimiendo...";
-                            document.getElementById("descompressButton").disabled = true;
-                            document.getElementById("loadingSpinner").style.display = "block"; // Muestra el spinner
-                        });
+      <h1 class="titulo">Descomprimir Archivo</h1>
+      <div class="container">
+        <form
+          action="/decompress"
+          method="POST"
+          enctype="multipart/form-data"
+          id="uploadForm"
+        >
+          <div class="main-bottom-left">
+            <label for="fileToDecompress" class="labelform"
+              >Selecciona o arrastra un archivo .huff para descomprimir:</label
+            ><br />
+            <input
+              type="file"
+              id="fileToDecompress"
+              name="fileToDecompress"
+              style="display: none"
+              accept=".huff"
+            />
+            <div
+              id="dropzone"
+              style="
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+                background: rgba(0, 0, 0, 0.5);
+                color: white;
+                text-align: center;
+                line-height: 100vh;
+                z-index: 9999;
+              "
+            ></div>
+            <label for="fileToDecompress" id="file-label"
+              >Seleccionar archivo</label
+            >
+            <b><p id="upload-message"></p></b>
+            <script src="{{ url_for('static', filename='js/dragdrophuff.js') }}"></script>
+          </div>
+          <br />
+          <div class="main-bottom-right">
+            <input
+              type="submit"
+              value="Descomprimir"
+              class="boton"
+              id="descompressButton"
+            /><br /><br />
+            <div id="loadingSpinner" style="display: none">
+              <img
+                src="{{ url_for('static', filename='images/spinner.gif') }}"
+                alt="Cargando..."
+              />
+            </div>
+            <script>
+              // Cuando se envíe el formulario
+              document
+                .getElementById("uploadForm")
+                .addEventListener("submit", function () {
+                  // Cambia el texto del botón y deshabilita el botón
+                  document.getElementById("descompressButton").value =
+                    "Descomprimiendo...";
+                  document.getElementById("descompressButton").disabled = true;
+                  document.getElementById("loadingSpinner").style.display =
+                    "block"; // Muestra el spinner
+                });
 
-                        // Cuando la compresión se haya completado
-                        // Esto dependerá de cómo estés manejando la compresión en tu código
-                        // Aquí hay un ejemplo genérico
-                        compressFile().then(() => {
-                            document.getElementById("descompressButton").value = "Descomprimir";
-                            document.getElementById("descompressButton").disabled = false;
-                            document.getElementById("loadingSpinner").style.display = "none"; // Oculta el spinner
-                        });
-                    </script>
-                    <script src="{{url_for('static', filename='js/habdeshabbotonhuff.js')}}"></script>
-                    <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
-                </div>
-            </form>
-        </div>
-        <div class="redes-sociales">
-            <ul>
-                <li><a href="https://www.facebook.com/jesusantonio.lopezbandala.7" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ==" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://github.com/JesDev12U" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jalb12u/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="https://www.tiktok.com/@.jes12u" target="_blank"><i class="fab fa-tiktok"></i></a></li>
-            </ul>            
-        </div>
-        <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
+              // Cuando se cargue la página, esto es cuando ya se haya descomprimido el archivo
+              compressFile().then(() => {
+                // Cambia el texto del botón y habilita el botón
+                document.getElementById("descompressButton").value =
+                  "Descomprimir";
+                document.getElementById("descompressButton").disabled = false;
+                document.getElementById("loadingSpinner").style.display =
+                  "none"; // Oculta el spinner
+              });
+            </script>
+            <script src="{{url_for('static', filename='js/habdeshabbotonhuff.js')}}"></script>
+            <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
+          </div>
+        </form>
+      </div>
+      <div class="redes-sociales">
+        <ul>
+          <li>
+            <a
+              href="https://www.facebook.com/jesusantonio.lopezbandala.7"
+              target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ=="
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://github.com/JesDev12U" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/jalb12u/" target="_blank"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.tiktok.com/@.jes12u" target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+      <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
     </main>
     <div id="particles-js"></div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/particles.min.js') }}"
+    ></script>
     <script src="{{url_for('static', filename='js/particlesjs-config.json')}}"></script>
-</body>
+  </body>
 </html>

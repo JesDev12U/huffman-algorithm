@@ -1,43 +1,83 @@
+<!--@author Jesus Antonio Lopez Bandala-->
+<!--@version 1.0-->
+<!--@date 2023-12-27-->
+<!--@brief Pagina principal de la aplicacion-->
+<!--@code HTML Django-->
+
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Huffman</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta author="Jesus Antonio Lopez Bandala">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <script src="https://kit.fontawesome.com/ecae724dfb.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta author="Jesus Antonio Lopez Bandala" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script
+      src="https://kit.fontawesome.com/ecae724dfb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <main>
-        <h1 class="titulo">Algoritmo de Huffman</h1>
-        <div class="container">
-            <div class="main-bottom">
-                <div class="main-bottom-left">
-                    <h2>Comprimir Archivo</h2>
-                    <p>Comprime un archivo de texto plano <b>.txt</b></p>
-                    <a href="{{ url_for('compress_page') }}">Comprimir</a>
-                </div>
-                <div class="main-bottom-right">
-                    <h2>Descomprimir Archivo</h2>
-                    <p>Descomprime un archivo comprimido <b>.huff</b></p>
-                    <a href="{{ url_for('decompress_page') }}">Descomprimir</a>
-                </div>
-            </div>
+      <h1 class="titulo">Algoritmo de Huffman</h1>
+      <div class="container">
+        <div class="main-bottom">
+          <div class="main-bottom-left">
+            <h2>Comprimir Archivo</h2>
+            <p>Comprime un archivo de texto plano <b>.txt</b></p>
+            <a href="{{ url_for('compress_page') }}">Comprimir</a>
+          </div>
+          <div class="main-bottom-right">
+            <h2>Descomprimir Archivo</h2>
+            <p>Descomprime un archivo comprimido <b>.huff</b></p>
+            <a href="{{ url_for('decompress_page') }}">Descomprimir</a>
+          </div>
         </div>
-        <div class="redes-sociales">
-            <ul>
-                <li><a href="https://www.facebook.com/jesusantonio.lopezbandala.7" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ==" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://github.com/JesDev12U" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jalb12u/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="https://www.tiktok.com/@.jes12u" target="_blank"><i class="fab fa-tiktok"></i></a></li>
-            </ul>            
-        </div>
-        <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
+      </div>
+      <div class="redes-sociales">
+        <ul>
+          <li>
+            <a
+              href="https://www.facebook.com/jesusantonio.lopezbandala.7"
+              target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ=="
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://github.com/JesDev12U" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/jalb12u/" target="_blank"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.tiktok.com/@.jes12u" target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+      <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
     </main>
     <div id="particles-js"></div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/particles.min.js') }}"
+    ></script>
     <script src="{{url_for('static', filename='js/particlesjs-config.json')}}"></script>
-</body>
+  </body>
 </html>

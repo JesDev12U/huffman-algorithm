@@ -1,4 +1,12 @@
-.main-bottom-left{
-    margin-right: 0;
-    text-align: center;
+/*
+* @file style-compress.css
+* @brief Archivo de estilos CSS, estilo para acomodar la zona donde se comprimen y descomprimen los archivos
+* @version 1.0
+* @date 2023-12-27
+* @author Jesus Antonio Lopez Bandala
+*/
+
+.main-bottom-left {
+  margin-right: 0;
+  text-align: center;
 }

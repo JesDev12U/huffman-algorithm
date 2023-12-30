@@ -1,3 +1,11 @@
-.main-bottom-left{
-    margin:0;
+/*
+* @file style-downloadcompress.css
+* @brief Archivo de estilos CSS, estilos para acomodar la zona de descargas
+* @version 1.0
+* @date 2023-12-27
+* @author Jesus Antonio Lopez Bandala
+*/
+
+.main-bottom-left {
+  margin: 0;
 }

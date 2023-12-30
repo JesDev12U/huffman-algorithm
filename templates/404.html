@@ -1,38 +1,85 @@
+<!--@author Jesus Antonio Lopez Bandala-->
+<!--@version 1.0-->
+<!--@date 2023-12-27-->
+<!--@brief Página para el error 404-->
+<!--@code HTML Django-->
+
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Huffman</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta author="Jesus Antonio Lopez Bandala">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/404.css') }}">
-    <script src="https://kit.fontawesome.com/ecae724dfb.js" crossorigin="anonymous"></script>
-</head>
-<body>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta author="Jesus Antonio Lopez Bandala" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/404.css') }}"
+    />
+    <script
+      src="https://kit.fontawesome.com/ecae724dfb.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
     <main>
-        <h1 class="titulo">Algoritmo de Huffman</h1>
-        <div class="container">
-            <div class="main-bottom">
-                <div class="main-bottom-left">
-                    <img src="{{url_for('static', filename='images/404.png')}}" class="error-404">
-                    <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
-                </div>
-            </div>
+      <h1 class="titulo">Algoritmo de Huffman</h1>
+      <div class="container">
+        <div class="main-bottom">
+          <div class="main-bottom-left">
+            <img
+              src="{{url_for('static', filename='images/404.png')}}"
+              class="error-404"
+            />
+            <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
+          </div>
         </div>
-        <div class="redes-sociales">
-            <ul>
-                <li><a href="https://www.facebook.com/jesusantonio.lopezbandala.7" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ==" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://github.com/JesDev12U" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jalb12u/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="https://www.tiktok.com/@.jes12u" target="_blank"><i class="fab fa-tiktok"></i></a></li>
-            </ul>            
-        </div>
-        <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
+      </div>
+      <div class="redes-sociales">
+        <ul>
+          <li>
+            <a
+              href="https://www.facebook.com/jesusantonio.lopezbandala.7"
+              target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ=="
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://github.com/JesDev12U" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/jalb12u/" target="_blank"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.tiktok.com/@.jes12u" target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+      <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
     </main>
     <div id="particles-js"></div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/particles.min.js') }}"
+    ></script>
     <script src="{{url_for('static', filename='js/particlesjs-config.json')}}"></script>
-</body>
+  </body>
 </html>

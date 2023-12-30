@@ -4,26 +4,29 @@
  * @version 1.0
  * @date 2023-12-17
  * @author Jesus Antonio Lopez Bandala
- * @title Compresión de Huffman
-*/
+ * @title Codificación y decodificación de Huffman (Código de teoría)
+ * @procedure El programa lo que hace es codificar y decodificar ya sea un texto o un archivo de texto,
+ * se imprime la cola de prioridad, el árbol de Huffman, los códigos de Huffman, el texto codificado y el
+ * texto decodificado.
+ */
 
-#include <queue> //Libreria para usar la cola de prioridad
-#include <vector> //Libreria para usar vectores que nos ayudarán para la cola de prioridad
-#include <map> //Mapas para recopilar los códigos de Huffman
+#include <queue>    //Libreria para usar la cola de prioridad
+#include <vector>   //Libreria para usar vectores que nos ayudarán para la cola de prioridad
+#include <map>      //Mapas para recopilar los códigos de Huffman
 #include <iostream> //Libreria para usar cout y cin
-#include <fstream> //Libreria para usar archivos
-#include <conio.h> //Libreria para usar getch()
+#include <fstream>  //Libreria para usar archivos
+#include <conio.h>  //Libreria para usar getch()
 
-using namespace std; //Para no usar std::cout o std::cin
+using namespace std; // Para no usar std::cout o std::cin
 
 // Clase Nodo para el árbol de Huffman
 class Nodo
 {
 public:
-    char caracter; // Caracter del nodo
-    int frecuencia; // Frecuencia del caracter
+    char caracter;   // Caracter del nodo
+    int frecuencia;  // Frecuencia del caracter
     Nodo *izquierdo; // Nodo izquierdo
-    Nodo *derecho; // Nodo derecho
+    Nodo *derecho;   // Nodo derecho
 
     // Constructor para inicializar el nodo
     Nodo(char caracter, int frecuencia)
@@ -36,9 +39,12 @@ public:
 };
 
 // Estructura comparar para la cola de prioridad, esto es para ordenar los nodos
-struct comparar {
-    bool operator()(Nodo* l, Nodo* r) { // Se sobrecarga el operador () para comparar los nodos, un nodo es el primer par (l) y el otro es el segundo par (r)
-        if (l->frecuencia == r->frecuencia) {
+struct comparar
+{
+    bool operator()(Nodo *l, Nodo *r)
+    { // Se sobrecarga el operador () para comparar los nodos, un nodo es el primer par (l) y el otro es el segundo par (r)
+        if (l->frecuencia == r->frecuencia)
+        {
             // Si las frecuencias son iguales, ordenar alfabéticamente
             return l->caracter > r->caracter; // Se ordena conforme al código ASCII
         }
@@ -51,7 +57,7 @@ struct comparar {
 class Huffman
 {
 private:
-    Nodo *raiz; // Raíz del árbol de Huffman
+    Nodo *raiz;                    // Raíz del árbol de Huffman
     map<char, string> huffmanCode; // Mapa para almacenar los códigos de Huffman
 
     // Método para codificar el árbol de Huffman
@@ -72,7 +78,6 @@ private:
     }
 
 public:
-
     // Método para imprimir la cola de prioridad, esto sirve para visualizar si la cola de prioridad se está ordenando correctamente
     void imprimirColaPrioridad(priority_queue<Nodo *, vector<Nodo *>, comparar> pq)
     {
@@ -84,7 +89,7 @@ public:
             // Obtener el nodo de la cima de la cola
             Nodo *nodo = temp.top();
             cout << nodo->caracter << " (" << nodo->frecuencia << ") "; // Imprimir el caracter y la frecuencia
-            temp.pop(); // Eliminar el nodo de la cima de la cola, esto para irla recorriendo
+            temp.pop();                                                 // Eliminar el nodo de la cima de la cola, esto para irla recorriendo
         }
         cout << "\n";
     }
@@ -93,13 +98,13 @@ public:
     Huffman(string texto)
     {
         map<char, int> frecuencia; // Mapa para almacenar la frecuencia de cada caracter
-        for (char ch : texto) // Recorrer el texto
+        for (char ch : texto)      // Recorrer el texto
         {
             frecuencia[ch]++; // Incrementar la frecuencia del caracter en 1, si encuentra el mismo caracter, se incrementará su frecuencia
         }
 
         priority_queue<Nodo *, vector<Nodo *>, comparar> pq; // Cola de prioridad para ordenar los nodos
-        for (auto pair : frecuencia) // Recorrer el mapa de frecuencias
+        for (auto pair : frecuencia)                         // Recorrer el mapa de frecuencias
         {
             pq.push(new Nodo(pair.first, pair.second)); // Insertar el caracter y su frecuencia en la cola de prioridad, respetando el orden definido en la estructura comparar
         }
@@ -108,18 +113,18 @@ public:
 
         while (pq.size() > 1) // Mientras la cola de prioridad tenga más de un elemento, esto es para construir el árbol de Huffman
         {
-            Nodo *izquierdo = pq.top(); // Obtener el nodo de la cima de la cola
-            pq.pop(); // Eliminar el nodo de la cima de la cola, esto para irla recorriendo
-            Nodo *derecho = pq.top(); // Obtener el nodo de la cima de la cola
-            pq.pop(); // Eliminar el nodo de la cima de la cola, esto para irla recorriendo
+            Nodo *izquierdo = pq.top();                            // Obtener el nodo de la cima de la cola
+            pq.pop();                                              // Eliminar el nodo de la cima de la cola, esto para irla recorriendo
+            Nodo *derecho = pq.top();                              // Obtener el nodo de la cima de la cola
+            pq.pop();                                              // Eliminar el nodo de la cima de la cola, esto para irla recorriendo
             int sum = izquierdo->frecuencia + derecho->frecuencia; // Sumar las frecuencias de los nodos
-            Nodo *nuevo = new Nodo('\0', sum); // Crear un nuevo nodo con el caracter nulo y la suma de las frecuencias
-            nuevo->izquierdo = izquierdo; // Asignar la parte izquierda del nuevo nodo a el primer nodo que recuperamos de la cola de prioridad
-            nuevo->derecho = derecho; // Asignar la parte derecha del nuevo nodo a el segundo nodo que recuperamos de la cola de prioridad
-            pq.push(nuevo); // Insertar el nuevo nodo en la cola de prioridad
+            Nodo *nuevo = new Nodo('\0', sum);                     // Crear un nuevo nodo con el caracter nulo y la suma de las frecuencias
+            nuevo->izquierdo = izquierdo;                          // Asignar la parte izquierda del nuevo nodo a el primer nodo que recuperamos de la cola de prioridad
+            nuevo->derecho = derecho;                              // Asignar la parte derecha del nuevo nodo a el segundo nodo que recuperamos de la cola de prioridad
+            pq.push(nuevo);                                        // Insertar el nuevo nodo en la cola de prioridad
         }
 
-        raiz = pq.top(); // Obtener el nodo de la cima de la cola, este será la raíz del árbol de Huffman
+        raiz = pq.top();     // Obtener el nodo de la cima de la cola, este será la raíz del árbol de Huffman
         codificar(raiz, ""); // Llamada al método para codificar el árbol de Huffman
     }
 
@@ -135,11 +140,11 @@ public:
     void imprimirArbol(Nodo *raiz, int cont = 0) // Método para imprimir el árbol de Huffman
     {
         /*
-        * La variable cont en esta función se utiliza para rastrear y controlar la profundidad del nodo actual en el árbol Huffman mientras 
-        se imprime. Esta variable mantiene un registro del nivel del nodo en el árbol para que la impresión refleje correctamente 
+        * La variable cont en esta función se utiliza para rastrear y controlar la profundidad del nodo actual en el árbol Huffman mientras
+        se imprime. Esta variable mantiene un registro del nivel del nodo en el árbol para que la impresión refleje correctamente
         la estructura jerárquica del árbol.
 
-        * El propósito principal de cont es controlar la cantidad de tabulaciones o espacios que se imprimen antes de cada nodo para 
+        * El propósito principal de cont es controlar la cantidad de tabulaciones o espacios que se imprimen antes de cada nodo para
         representar visualmente su nivel o profundidad en el árbol.
         */
         if (raiz == NULL)
@@ -156,21 +161,22 @@ public:
 
 void codDecodText(string texto)
 {
-    Huffman huffman(texto); // Crear un objeto de la clase Huffman
+    Huffman huffman(texto);                                   // Crear un objeto de la clase Huffman
     map<char, string> huffmanCode = huffman.getHuffmanCode(); // Obtener el mapa de códigos de Huffman
 
     cout << "Codificacion de Huffman:\n";
     string strEncoded;
     map<char, bool> caracteresImpresos; // Mapa para almacenar los caracteres ya impresos
-    for (char ch : texto) // Recorrer el texto
+    for (char ch : texto)               // Recorrer el texto
     {
         // Concatenar el código de Huffman de cada caracter
         strEncoded += huffmanCode[ch];
         // Verificar si el carácter ya ha sido impreso
-        if (caracteresImpresos.find(ch) == caracteresImpresos.end()) { // verifica si la busqueda del caracter ch en el mapa 
-                                                                        // caracteresImpresos es igual al final del mapa, si es así, 
-                                                                        //significa que no se encontró el caracter, por lo tanto debe 
-                                                                        //imprimirse
+        if (caracteresImpresos.find(ch) == caracteresImpresos.end())
+        { // verifica si la busqueda del caracter ch en el mapa
+          // caracteresImpresos es igual al final del mapa, si es así,
+          // significa que no se encontró el caracter, por lo tanto debe
+          // imprimirse
             // Si no ha sido impreso, imprimir el carácter y su código de Huffman
             cout << ch << ": " << huffmanCode[ch] << "\n";
             // Marcar el carácter como impreso en el mapa
@@ -182,7 +188,7 @@ void codDecodText(string texto)
 
     string strDecoded;
     Nodo *nodo = huffman.getRaiz(); // Obtener la raíz del árbol de Huffman
-    for (char bit : strEncoded) // Recorrer el texto codificado
+    for (char bit : strEncoded)     // Recorrer el texto codificado
     {
         if (bit == '0') // Si el bit es 0, ir al nodo izquierdo
         {
@@ -202,7 +208,7 @@ void codDecodText(string texto)
     }
 
     cout << "Texto decodificado: " << strDecoded << "\n";
-    long long bitsEnconded = strEncoded.size(); // Obtener el tamaño del texto codificado
+    long long bitsEnconded = strEncoded.size();    // Obtener el tamaño del texto codificado
     long long bitsDecoded = strDecoded.size() * 8; // Obtener el tamaño del texto decodificado, recordando que cada caracter son 8 bits
     cout << "Bits codificados: " << bitsEnconded << "\n";
     cout << "Bits decodificados: " << bitsDecoded << "\n";
@@ -214,15 +220,15 @@ void codDecodText(string texto)
     getch(); // Pausar el programa hasta que se presione una tecla
 }
 
-void codDecodTxt() //El proceso que hace esta función es casi igual al metodo codDecodText, la diferencia es que esta función lee un archivo de texto
+void codDecodTxt() // El proceso que hace esta función es casi igual al metodo codDecodText, la diferencia es que esta función lee un archivo de texto
 {
     string nombreArchivo = "";
     cout << "Introduce el nombre del archivo: ";
     fflush(stdin);
     getline(cin, nombreArchivo);
-    ifstream archivo; // Crear un objeto de la clase ifstream para leer el archivo
+    ifstream archivo;                     // Crear un objeto de la clase ifstream para leer el archivo
     archivo.open(nombreArchivo, ios::in); // Abrir el archivo
-    if (!archivo) // Comprobar si el archivo se pudo abrir
+    if (!archivo)                         // Comprobar si el archivo se pudo abrir
     {
         cerr << "No se pudo abrir el archivo";
         return;

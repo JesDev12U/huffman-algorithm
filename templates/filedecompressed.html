@@ -1,53 +1,100 @@
+<!--@author Jesus Antonio Lopez Bandala-->
+<!--@version 1.0-->
+<!--@date 2023-12-27-->
+<!--@brief Página para la descarga de los archivos descomprimidos .txt-->
+<!--@code HTML Django-->
+
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Huffman | Descargar archivo comprimido</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta author="Jesus Antonio Lopez Bandala">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style-downloadcompress.css') }}">
-    <script src="https://kit.fontawesome.com/ecae724dfb.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta author="Jesus Antonio Lopez Bandala" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style-downloadcompress.css') }}"
+    />
+    <script
+      src="https://kit.fontawesome.com/ecae724dfb.js"
+      crossorigin="anonymous"
+    ></script>
     <script>
-        window.onload = function() {
-            // Comprobar si hay un archivo para descargar en la sesión
-            if ('{{ session['download_file'] }}') {
-                // Iniciar la descarga del archivo
-                window.location.href = '{{ url_for('download_file') }}';
-            }
-            // Redirigir a la página de inicio después de 5 minutos
-            setTimeout(function() {
-                window.location.href = '{{ url_for('index') }}';
-            }, 300000); // 300000 milisegundos son 5 minutos    
-        };
+      window.onload = function() { // Cuando la página se cargue
+          // Comprobar si hay un archivo para descargar en la sesión
+          if ('{{ session['download_file'] }}') {
+              // Iniciar la descarga del archivo
+              window.location.href = '{{ url_for('download_file') }}';
+          }
+          // Redirigir a la página de inicio después de 5 minutos
+          setTimeout(function() {
+              window.location.href = '{{ url_for('index') }}';
+          }, 300000); // 300000 milisegundos son 5 minutos
+      };
     </script>
-</head>
-<body>
+  </head>
+  <body>
     <main>
-        <h1 class="titulo">Descargar archivo descomprimido</h1>
-        <div class="container">
-            <div class="main-bottom-left">
-                <h2>El archivo se ha descomprimido correctamente</h2>
-                <a href="{{url_for('download_file')}}" class="download-link"><i class="fa-solid fa-download"></i>&nbsp;Descargar</a>
-            </div><br>
-            <div class="main-bottom-right">
-                <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
-            </div>
+      <h1 class="titulo">Descargar archivo descomprimido</h1>
+      <div class="container">
+        <div class="main-bottom-left">
+          <h2>El archivo se ha descomprimido correctamente</h2>
+          <a href="{{url_for('download_file')}}" class="download-link"
+            ><i class="fa-solid fa-download"></i>&nbsp;Descargar</a
+          >
         </div>
-        <div class="redes-sociales">
-            <ul>
-                <li><a href="https://www.facebook.com/jesusantonio.lopezbandala.7" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                <li><a href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ==" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                <li><a href="https://github.com/JesDev12U" target="_blank"><i class="fab fa-github"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/jalb12u/" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                <li><a href="https://www.tiktok.com/@.jes12u" target="_blank"><i class="fab fa-tiktok"></i></a></li>
-            </ul>            
+        <br />
+        <div class="main-bottom-right">
+          <a href="{{url_for('index')}}" class="inicio-btn">Inicio</a>
         </div>
-        <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
+      </div>
+      <div class="redes-sociales">
+        <ul>
+          <li>
+            <a
+              href="https://www.facebook.com/jesusantonio.lopezbandala.7"
+              target="_blank"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+          </li>
+          <li>
+            <a
+              href="https://www.instagram.com/jes_12u?igsh=MTlhMnVlZXF6anM4OQ=="
+              target="_blank"
+              ><i class="fab fa-instagram"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://github.com/JesDev12U" target="_blank"
+              ><i class="fab fa-github"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/jalb12u/" target="_blank"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </li>
+          <li>
+            <a href="https://www.tiktok.com/@.jes12u" target="_blank"
+              ><i class="fab fa-tiktok"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+      <p class="copyright">&copy; Jesus Antonio Lopez Bandala</p>
     </main>
     <div id="particles-js"></div>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/particles.min.js') }}"></script>
+    <script
+      type="text/javascript"
+      src="{{ url_for('static', filename='js/particles.min.js') }}"
+    ></script>
     <script src="{{url_for('static', filename='js/particlesjs-config.json')}}"></script>
-</body>
+  </body>
 </html>

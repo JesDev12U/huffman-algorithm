@@ -1,16 +1,26 @@
-document.addEventListener('DOMContentLoaded', function() {
+/*
+ * @file dragdrophuff.js
+ * @brief Archivo que contiene el código para la funcionalidad de arrastrar y soltar archivos comprimidos .txt
+ * @version 1.0
+ * @date 2023-12-27
+ * @author Jesus Antonio Lopez Bandala
+ * @notes La funcionalidad es la misma que la de dragdrophuff.js, solo cambia la extensión del archivo
+ * @see dragdrophuff.js
+ */
+
+document.addEventListener('DOMContentLoaded', function () {
     var fileInput = document.getElementById('fileToCompress');
     var dropzone = document.getElementById('dropzone');
     var dragCounter = 0;
 
-    document.addEventListener('dragenter', function(event) {
+    document.addEventListener('dragenter', function (event) {
         event.preventDefault();
         dragCounter++;
         dropzone.style.display = 'block';
         dropzone.classList.add('dragover');
     });
 
-    document.addEventListener('dragleave', function(event) {
+    document.addEventListener('dragleave', function (event) {
         event.preventDefault();
         dragCounter--;
         if (dragCounter === 0) {
@@ -19,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    document.addEventListener('drop', function(event) {
+    document.addEventListener('drop', function (event) {
         event.preventDefault();
         dragCounter = 0;
         dropzone.style.display = 'none';
@@ -42,5 +52,5 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Por favor, arrastra solo un archivo.');
         }
     });
-    
+
 });
