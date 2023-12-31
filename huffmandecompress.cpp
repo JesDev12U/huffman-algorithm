@@ -16,6 +16,7 @@
 #include <queue>         // Librería para la cola de prioridad
 #include <unordered_map> // Librería para el mapa de frecuencias
 #include <fstream>       // Librería para leer y escribir archivos
+#include <ctime>    // Librería para medir el tiempo de ejecución de la descompresión
 using namespace std;     // Para no escribir std::cout, std::endl, etc.
 
 // Clase Nodo para el árbol de Huffman
@@ -137,6 +138,9 @@ int main(int argc, char const *argv[])
     }
     nomArchivo = argv[1];
     nomArchivoSalida = argv[2];
+    clock_t tStart = clock();
     descomprimirArchivo(nomArchivo, nomArchivoSalida);
+    clock_t tEnd = clock();
+    cout << "Tiempo de ejecucion: " << (double)(tEnd - tStart) / CLOCKS_PER_SEC << " segundos" << endl;
     return 0;
 }

@@ -15,6 +15,7 @@
 #include <queue>         // Librería para la cola de prioridad
 #include <unordered_map> // Librería para el mapa de frecuencias
 #include <fstream>       // Librería para leer y escribir archivos
+#include <ctime>     // Librería para medir el tiempo de ejecución de la compresión
 using namespace std;     // Para no escribir std::cout, std::endl, etc.
 
 // Clase Nodo para el árbol de Huffman
@@ -205,6 +206,7 @@ int main(int argc, char const *argv[])
         cerr << "No se pudo abrir el archivo" << endl;
         return 1;
     }
+    clock_t tStart = clock();
     agregarSaltoDeLinea(nomArchivo);
     string texto;
     char ch;
@@ -218,5 +220,8 @@ int main(int argc, char const *argv[])
     Nodo *raiz = construirArbolHuffman(texto); // Se construye el árbol de Huffman y se le asigna su raíz
     imprimirCodigos(raiz, "", codigosHuffman); // Se imprimen los códigos de Huffman, esto para tener listos los códigos
     comprimirArchivo(texto, codigosHuffman, nomArchivoSalida);
+    clock_t tEnd = clock();
+    double tiempo = (double)(tEnd - tStart) / CLOCKS_PER_SEC;
+    cout << "Tiempo de ejecucion: " << tiempo << " segundos" << endl;
     return 0;
 }
