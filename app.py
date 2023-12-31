@@ -39,7 +39,7 @@ def generar_nombre_unico(nombre_original):
     return f"{nombre_unico}{extension}" # Regresa el nombre aleatorio con la extensión
 
 def eliminar_archivo_despues_de_cinco_minutos(filename_generated, filename_uploads):
-    time.sleep(300000) # Espera 5 minutos, 300000 milisegundos
+    time.sleep(300) # Espera 5 minutos, 300 segundos
     # Elimina los archivos, tanto el comprimido o descomprimido como el original
     os.remove(filename_generated)
     os.remove(filename_uploads)
