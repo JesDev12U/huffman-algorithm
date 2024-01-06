@@ -7,7 +7,17 @@ If you want to see this project, <a href="https://youtu.be/J29Ls9i50Ew?si=u4pEV5
 <img src="https://github.com/JesDev12U/huffman-algorithm/assets/119618881/3127412a-0961-4abf-9c9c-2cc59ac00e81" width="700px"/>
 <img src="https://github.com/JesDev12U/huffman-algorithm/assets/119618881/bc1a2ce1-7d1f-4035-83c7-61ca38133c11" width="700px"/>
 
-# Considerations
+# Console program
+If you want run the console program, you need to compile the huffman.cpp file
+```
+g++ -o huffman huffman.cpp
+```
+Then, run the program
+```
+./huffman
+```
+
+# Considerations for the web app
 <ul>
   <li>You need to install the latest version of C++ Compiler, I recommend the MinGW 6.3.0 compiler because in this compiler I was develop the algorithms</li>
   <li>You need to install the latest version of Python, or minimum the 3.10 version. Also you need to install Flask. You can install it with this command:</li>
@@ -24,8 +34,13 @@ pip install flask
   <li>Compile the C++ algorithms</li>
  
   ```
-  g++ -o huffmancompress huffmancompress.cpp <FILE INPUT .txt> <FILE OUTPUT .huff>
-  g++ -o huffmandecompress huffmandecompress.cpp <FILE INPUT .huff> <FILE OUTPUT .txt>
+  g++ -o huffmancompress huffmancompress.cpp
+  g++ -o huffmandecompress huffmandecompress.cpp
+  ```
+  If you want to run the algorithms in the console, you can do it, but you need to type the names of the input file and the output file
+  ```
+  ./huffman compress <FILE INPUT .txt> <FILE OUTPUT .huff>
+  ./huffman decompress <FILE INPUT .huff> <FILE OUTPUT .txt>
   ```
   <li>Run the Python algorithm to run the Flask server</li>
   
