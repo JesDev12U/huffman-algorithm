@@ -2,7 +2,7 @@
 
 If you want to see this project, <a href="https://youtu.be/J29Ls9i50Ew?si=u4pEV50TwGS8ntMC">you can see my video in YouTube</a>
 
-<img src="https://github.com/JesDev12U/huffman-algorithm/assets/119618881/71517a54-8bc6-43c7-af69-d681932cddde" width="250px"/>
+<img src="https://github.com/JesDev12U/huffman-algorithm/assets/119618881/71517a54-8bc6-43c7-af69-d681932cddde" width="350px"/>
 <img src="https://github.com/JesDev12U/huffman-algorithm/assets/119618881/48929c35-c76a-4603-96af-bcb54318aa14" width="700px"/>
 <img src="https://github.com/JesDev12U/huffman-algorithm/assets/119618881/3127412a-0961-4abf-9c9c-2cc59ac00e81" width="700px"/>
 <img src="https://github.com/JesDev12U/huffman-algorithm/assets/119618881/bc1a2ce1-7d1f-4035-83c7-61ca38133c11" width="700px"/>
