@@ -180,25 +180,43 @@ public:
         return raiz;
     }
 
-    void imprimirArbol(Nodo *raiz, int cont = 0) // Método para imprimir el árbol de Huffman
+    void imprimirArbol(Nodo *raiz, string prefijo = "", bool esIzquierdo = false, bool esRaiz = true) // Método para imprimir el árbol de Huffman
     {
-        /*
-        * La variable cont en esta función se utiliza para rastrear y controlar la profundidad del nodo actual en el árbol Huffman mientras
-        se imprime. Esta variable mantiene un registro del nivel del nodo en el árbol para que la impresión refleje correctamente
-        la estructura jerárquica del árbol.
-
-        * El propósito principal de cont es controlar la cantidad de tabulaciones o espacios que se imprimen antes de cada nodo para
-        representar visualmente su nivel o profundidad en el árbol.
-        */
         if (raiz == NULL)
             return;
 
-        imprimirArbol(raiz->derecho, cont + 1);
-        for (int i = 0; i < cont; i++)
-            cout << "\t";
-        cout << raiz->caracter << " (" << raiz->frecuencia << ")\n";
+        // Imprimir prefijo y ramas con color amarillo
+        cout << "\033[1;33m" << prefijo;
+        if (!esRaiz)
+        {
+            cout << (esIzquierdo ? "├── " : "└── ");
+        }
+        cout << "\033[0m"; // Resetear color
 
-        imprimirArbol(raiz->izquierdo, cont + 1); // Recorrer el árbol de Huffman si es que aún no se ha llegado a una hoja
+        // Imprimir nodo
+        if (raiz->caracter == '\0')
+        {
+            cout << "\033[1;31m[*]\033[0m"; // Nodos internos en rojo
+        }
+        else
+        {
+            cout << "\033[1;32m'"; // Hoja (caracter) en verde
+            if (raiz->caracter == '\n')
+                cout << "\\n";
+            else if (raiz->caracter == '\t')
+                cout << "\\t";
+            else if (raiz->caracter == '\r')
+                cout << "\\r";
+            else
+                cout << raiz->caracter;
+            cout << "'\033[0m";
+        }
+        cout << " \033[1;36m(" << raiz->frecuencia << ")\033[0m\n"; // Frecuencias en cyan
+
+        string nuevoPrefijo = prefijo + (!esRaiz && esIzquierdo ? "│   " : "    ");
+
+        imprimirArbol(raiz->izquierdo, nuevoPrefijo, true, false);
+        imprimirArbol(raiz->derecho, nuevoPrefijo, false, false);
     }
 };
 
