@@ -1,6 +1,7 @@
 *.exe
 .vscode/
 *.txt
+!CMakeLists.txt
 *.bin
 *.dat
 *.huff
