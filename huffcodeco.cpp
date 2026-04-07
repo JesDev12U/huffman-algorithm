@@ -207,10 +207,7 @@ void descomprimirArchivo(string nomArchivo)
     Nodo *raiz = leerArbolHuffman(archivoComprimido); // Deciframos la esructura del árbol de Huffman que fue
                                                       // guardada en el archivo comprimido
 
-    int buffer = 0;       // Buffer de bits
-    int bitsEnBuffer = 0; // Cantidad de bits en el buffer
-    // Lee la cantidad de bits válidos en el último byte
-    int bitsValidos = 0;
+    int buffer = 0;          // Buffer de bits
     Nodo *nodoActual = raiz; // Nodo actual, esto es para decodificar el texto comprimido
     ofstream archivoDescomprimido(nomArchivo + "_descompress.txt", ios::out | ios::binary);
     while (archivoComprimido.read(reinterpret_cast<char *>(&buffer), 1))

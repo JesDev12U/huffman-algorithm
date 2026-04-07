@@ -16,7 +16,7 @@
 #include <queue>         // Librería para la cola de prioridad
 #include <unordered_map> // Librería para el mapa de frecuencias
 #include <fstream>       // Librería para leer y escribir archivos
-#include <ctime>    // Librería para medir el tiempo de ejecución de la descompresión
+#include <ctime>         // Librería para medir el tiempo de ejecución de la descompresión
 using namespace std;     // Para no escribir std::cout, std::endl, etc.
 
 // Clase Nodo para el árbol de Huffman
@@ -94,10 +94,7 @@ void descomprimirArchivo(string nomArchivo, string nomArchivoSalida)
     Nodo *raiz = leerArbolHuffman(archivoComprimido); // Deciframos la esructura del árbol de Huffman que fue
                                                       // guardada en el archivo comprimido
 
-    int buffer = 0;       // Buffer de bits
-    int bitsEnBuffer = 0; // Cantidad de bits en el buffer
-    // Lee la cantidad de bits válidos en el último byte
-    int bitsValidos = 0;
+    int buffer = 0;          // Buffer de bits
     Nodo *nodoActual = raiz; // Nodo actual, esto es para decodificar el texto comprimido
     ofstream archivoDescomprimido(nomArchivoSalida + ".txt", ios::out | ios::binary);
     while (archivoComprimido.read(reinterpret_cast<char *>(&buffer), 1))
