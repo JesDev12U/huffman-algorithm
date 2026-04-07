@@ -1,8 +1,9 @@
 /**
  * @file huffman.cpp
  * @brief Implementación del algoritmo de compresión de Huffman
- * @version 1.0
+ * @version 1.1
  * @date 2023-12-17
+ * @date MODIFIED 2026-04-06
  * @author Jesus Antonio Lopez Bandala
  * @title Codificación y decodificación de Huffman (Código de teoría)
  * @procedure El programa lo que hace es codificar y decodificar ya sea un texto o un archivo de texto,
@@ -15,7 +16,49 @@
 #include <map>      //Mapas para recopilar los códigos de Huffman
 #include <iostream> //Libreria para usar cout y cin
 #include <fstream>  //Libreria para usar archivos
-#include <conio.h>  //Libreria para usar getch()
+#include <limits>   // Para cin.ignore() y numeric_limits
+
+#ifdef _WIN32
+#include <conio.h>
+#else
+#include <termios.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/select.h>
+#include <sys/time.h>
+
+static int getch(void)
+{
+    // Si stdin no es un TTY (ej. entrada piped), hacer una comprobación no bloqueante
+    if (!isatty(STDIN_FILENO))
+    {
+        fd_set rfds;
+        struct timeval tv;
+        FD_ZERO(&rfds);
+        FD_SET(STDIN_FILENO, &rfds);
+        tv.tv_sec = 0;
+        tv.tv_usec = 0; // no bloqueante
+        int ready = select(STDIN_FILENO + 1, &rfds, NULL, NULL, &tv);
+        if (ready > 0)
+        {
+            int c = getchar();
+            return (c == EOF) ? 0 : c;
+        }
+        // No hay entrada disponible: no bloquear, regresar 0
+        return 0;
+    }
+
+    struct termios oldt, newt;
+    int ch;
+    tcgetattr(STDIN_FILENO, &oldt);
+    newt = oldt;
+    newt.c_lflag &= ~(ICANON | ECHO);
+    tcsetattr(STDIN_FILENO, TCSANOW, &newt);
+    ch = getchar();
+    tcsetattr(STDIN_FILENO, TCSANOW, &oldt);
+    return ch;
+}
+#endif
 
 using namespace std; // Para no usar std::cout o std::cin
 
@@ -161,6 +204,13 @@ public:
 
 void codDecodText(string texto)
 {
+    if (texto.empty())
+    {
+        cout << "\nTexto vacío. No se pudo procesar.\n";
+        cout << "Press any key to continue...";
+        getch();
+        return;
+    }
     Huffman huffman(texto);                                   // Crear un objeto de la clase Huffman
     map<char, string> huffmanCode = huffman.getHuffmanCode(); // Obtener el mapa de códigos de Huffman
 
@@ -224,7 +274,7 @@ void codDecodTxt() // El proceso que hace esta función es casi igual al metodo 
 {
     string nombreArchivo = "";
     cout << "Introduce el nombre del archivo: ";
-    fflush(stdin);
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
     getline(cin, nombreArchivo);
     ifstream archivo;                     // Crear un objeto de la clase ifstream para leer el archivo
     archivo.open(nombreArchivo, ios::in); // Abrir el archivo
@@ -262,7 +312,7 @@ int main()
         {
             string texto;
             cout << "\nIntroduce el texto: ";
-            fflush(stdin);
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
             getline(cin, texto);
             codDecodText(texto); // Llamada al método para codificar y decodificar el texto
             break;
